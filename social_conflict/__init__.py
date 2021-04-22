@@ -123,9 +123,9 @@ class GroupingWaitPage(WaitPage):
         }
 
 
-class DictatorConflict(Page):
+class DictatorOffer(Page):
     form_model = 'player'
-    form_fields = ['offer', 'conflicted', 'bad', 'good']
+    form_fields = ['offer']
 
     timeout_seconds = 30
 
@@ -141,6 +141,15 @@ class ResultsWaitPage(WaitPage):
     def app_after_this_page(player, upcoming_apps):
         if waiting_too_long(player):
             return upcoming_apps[-1]
+
+
+class DictatorConflict(Page):
+    form_model = 'player'
+    form_fields = ['conflicted', 'bad', 'good']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.role == Constants.dictator_role
 
 
 class DictatorRegret(Page):
@@ -223,8 +232,9 @@ class Debriefing(Page):
 
 page_sequence = [
     GroupingWaitPage,
-    DictatorConflict,
+    DictatorOffer,
     ResultsWaitPage,
+    DictatorConflict,
     DictatorRegret,
     RecipientConflict,
     RecipientAlternative0,
