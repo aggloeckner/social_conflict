@@ -31,6 +31,5 @@ class Showup_Fee(Page):
 
     def vars_for_template(player: Player):
         return dict(role=player.participant.role)
-        )
 
 page_sequence = [Showup_Fee]
