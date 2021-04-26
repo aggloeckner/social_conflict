@@ -7,15 +7,21 @@ doc = """
 Your app description
 """
 
-
 class Constants(BaseConstants):
     name_in_url = 'showup_fee'
     players_per_group = None
     num_rounds = 1
 
-
 class Subsession(BaseSubsession):
     pass
+
+
+def make_likert_7(label):
+    return models.IntegerField(
+        choices=[1, 2, 3, 4, 5, 6, 7],
+        label=label,
+        widget=widgets.RadioSelectHorizontal,
+    )
 
 
 class Group(BaseGroup):
@@ -23,7 +29,16 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+        ambivalence1 = make_likert_7("")
+        ambivalence2 = make_likert_7("")
+        ambivalence3 = make_likert_7("")
+        ambivalence4 = make_likert_7("")
+        ambivalence5 = make_likert_7("")
+        ambivalence6 = make_likert_7("")
+        ambivalence7 = make_likert_7("")
+        ambivalence8 = make_likert_7("")
+        ambivalence9 = make_likert_7("")
+        ambivalence10 = make_likert_7("")
 
 
 # PAGES
@@ -33,7 +48,7 @@ class Showup_Fee(Page):
         return dict(role=player.participant.role)
 
 
-class Hypothetical_Ambivalence(Page):
+class Ambivalence(Page):
     form_model = 'player'
     form_fields = [
         'ambivalence1',
@@ -53,4 +68,8 @@ class Debriefing(Page):
     pass
 
 
-page_sequence = [Showup_Fee, Hypothetical_Ambivalence, Debriefing]
+page_sequence = [
+    Showup_Fee,
+    Ambivalence,
+    Debriefing,
+]
