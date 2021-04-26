@@ -32,4 +32,25 @@ class Showup_Fee(Page):
     def vars_for_template(player: Player):
         return dict(role=player.participant.role)
 
-page_sequence = [Showup_Fee]
+
+class Hypothetical_Ambivalence(Page):
+    form_model = 'player'
+    form_fields = [
+        'ambivalence1',
+        'ambivalence2',
+        'ambivalence3',
+        'ambivalence4',
+        'ambivalence5',
+        'ambivalence6',
+        'ambivalence7',
+        'ambivalence8',
+        'ambivalence9',
+        'ambivalence10',
+    ]
+
+
+class Debriefing(Page):
+    pass
+
+
+page_sequence = [Showup_Fee, Hypothetical_Ambivalence, Debriefing]
