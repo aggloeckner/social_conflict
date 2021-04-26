@@ -89,7 +89,7 @@ def set_payoffs(group: Group):
 def waiting_too_long(player):
     participant = player.participant
     import time
-    return time.time() - participant.wait_page_arrival > 30
+    return time.time() - participant.wait_page_arrival > 300
 
 
 def group_by_arrival_time_method(subsession, waiting_players):
@@ -127,7 +127,7 @@ class DictatorOffer(Page):
     form_model = 'player'
     form_fields = ['offer']
 
-    timeout_seconds = 30
+    timeout_seconds = 300
 
     @staticmethod
     def is_displayed(player: Player):
