@@ -40,38 +40,38 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     offer = models.CurrencyField(min=0, max=Constants.endowment, label="")
-    conflicted = make_likert("")
+    confl = make_likert("")
     bad = make_likert("")
     good = make_likert("")
     satisfied = make_likert("")
     regret = make_likert("")
-    play_again = make_likert("")
-    play_again_other = make_likert("")
-    conflicted_0 = make_likert("")
-    conflicted_25 = make_likert("")
-    conflicted_50 = make_likert("")
+    p_a = make_likert("")
+    p_a_o = make_likert("")
+    confl_0 = make_likert("")
+    confl_25 = make_likert("")
+    confl_50 = make_likert("")
     bad_0 = make_likert("")
     bad_25 = make_likert("")
     bad_50 = make_likert("")
     good_0 = make_likert("")
     good_25 = make_likert("")
     good_50 = make_likert("")
-    play_again_0 = make_likert("")
-    play_again_25 = make_likert("")
-    play_again_50 = make_likert("")
-    play_again_other_0 = make_likert("")
-    play_again_other_25 = make_likert("")
-    play_again_other_50 = make_likert("")
-    ambivalence1 = make_likert_7("")
-    ambivalence2 = make_likert_7("")
-    ambivalence3 = make_likert_7("")
-    ambivalence4 = make_likert_7("")
-    ambivalence5 = make_likert_7("")
-    ambivalence6 = make_likert_7("")
-    ambivalence7 = make_likert_7("")
-    ambivalence8 = make_likert_7("")
-    ambivalence9 = make_likert_7("")
-    ambivalence10 = make_likert_7("")
+    p_a_0 = make_likert("")
+    p_a_25 = make_likert("")
+    p_a_50 = make_likert("")
+    p_a_o_0 = make_likert("")
+    p_a_o_25 = make_likert("")
+    p_a_o_50 = make_likert("")
+    amb1 = make_likert_7("")
+    amb2 = make_likert_7("")
+    amb3 = make_likert_7("")
+    amb4 = make_likert_7("")
+    amb5 = make_likert_7("")
+    amb6 = make_likert_7("")
+    amb7 = make_likert_7("")
+    amb8 = make_likert_7("")
+    amb9 = make_likert_7("")
+    amb10 = make_likert_7("")
 
 
 # FUNCTIONS
@@ -79,8 +79,8 @@ def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
     if p1.offer is not None:
-        p1.payoff = Constants.endowment - p1.offer
-        p2.payoff = p1.offer
+        p1.payoff = (Constants.endowment - p1.offer) + cu(2)
+        p2.payoff = p1.offer + cu(2)
     else:
         p1.payoff = -200
         p2.payoff = 200
@@ -145,7 +145,7 @@ class ResultsWaitPage(WaitPage):
 
 class PlayerA_CBG(Page):
     form_model = 'player'
-    form_fields = ['conflicted', 'bad', 'good']
+    form_fields = ['confl', 'bad', 'good']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -154,7 +154,7 @@ class PlayerA_CBG(Page):
 
 class PlayerA_SRPP(Page):
     form_model = 'player'
-    form_fields = ['satisfied', 'regret', 'play_again', 'play_again_other']
+    form_fields = ['satisfied', 'regret', 'p_a', 'p_a_o']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -163,7 +163,7 @@ class PlayerA_SRPP(Page):
 
 class PlayerB_CBGPP(Page):
     form_model = 'player'
-    form_fields = ['conflicted', 'bad', 'good', 'play_again', 'play_again_other']
+    form_fields = ['confl', 'bad', 'good', 'p_a', 'p_a_o']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -176,7 +176,7 @@ class PlayerB_CBGPP(Page):
 
 class PlayerB_Alt0(Page):
     form_model = 'player'
-    form_fields = ['conflicted_0', 'bad_0', 'good_0', 'play_again_0', 'play_again_other_0']
+    form_fields = ['confl_0', 'bad_0', 'good_0', 'p_a_0', 'p_a_o_0']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -185,7 +185,7 @@ class PlayerB_Alt0(Page):
 
 class PlayerB_Alt25(Page):
     form_model = 'player'
-    form_fields = ['conflicted_25', 'bad_25', 'good_25', 'play_again_25', 'play_again_other_25']
+    form_fields = ['confl_25', 'bad_25', 'good_25', 'p_a_25', 'p_a_o_25']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -194,7 +194,7 @@ class PlayerB_Alt25(Page):
 
 class PlayerB_Alt50(Page):
     form_model = 'player'
-    form_fields = ['conflicted_50', 'bad_50', 'good_50', 'play_again_50', 'play_again_other_50']
+    form_fields = ['confl_50', 'bad_50', 'good_50', 'p_a_50', 'p_a_o_50']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -204,16 +204,16 @@ class PlayerB_Alt50(Page):
 class TAS(Page):
     form_model = 'player'
     form_fields = [
-        'ambivalence1',
-        'ambivalence2',
-        'ambivalence3',
-        'ambivalence4',
-        'ambivalence5',
-        'ambivalence6',
-        'ambivalence7',
-        'ambivalence8',
-        'ambivalence9',
-        'ambivalence10',
+        'amb1',
+        'amb2',
+        'amb3',
+        'amb4',
+        'amb5',
+        'amb6',
+        'amb7',
+        'amb8',
+        'amb9',
+        'amb10',
     ]
 
 
@@ -223,10 +223,10 @@ class Debriefing(Page):
         p1 = player.group.get_player_by_id(1)
         p2 = player.group.get_player_by_id(2)
         return dict(
-            kept=p1.payoff.to_real_world_currency(player.session),
-            offer=p2.payoff.to_real_world_currency(player.session),
-            total_p1=(200 + p1.payoff).to_real_world_currency(player.session),
-            total_p2=(200 + p2.payoff).to_real_world_currency(player.session),
+        kept=p1.payoff.to_real_world_currency(player.session),
+        offer=p2.payoff.to_real_world_currency(player.session),
+        total_earnings=player.participant.payoff_plus_participation_fee()
+
         )
 
 

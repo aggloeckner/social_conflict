@@ -10,7 +10,7 @@
 </p>
 <br>
 <p>
-    <strong>Meine Gedanken sind häufig widersprüchlich.</strong>
+    Meine Gedanken sind häufig widersprüchlich.
 </p>
 <br>
     <table style="text-align:left">
@@ -26,7 +26,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence1 %}
+        {% for choice in form.amb1 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -34,7 +34,7 @@
 </table>
 <br>
 <p>
-    <strong>Bezüglich vielen Themen empfinde / erlebe ich Konfliktzustände.</strong>
+    Bezüglich vielen Themen empfinde / erlebe ich Konfliktzustände.
 </p>
 <br>
     <table style="text-align:left">
@@ -50,7 +50,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence2 %}
+        {% for choice in form.amb2 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -58,7 +58,7 @@
 </table>
 <br>
 <p>
-    <strong>Meistens sehe ich bei Dingen die positive als auch die negative Seite.</strong>
+    Meistens sehe ich bei Dingen die positive als auch die negative Seite.
 </p>
     <table style="text-align:left">
   <tr>
@@ -73,7 +73,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence3 %}
+        {% for choice in form.amb3 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -81,7 +81,7 @@
 </table>
 <br>
 <p>
-   <strong> Oft fühle ich mich, als würden beide Seiten eines Themas an mir ziehen. </strong>
+    Oft fühle ich mich, als würden beide Seiten eines Themas an mir ziehen.
 </p>
 <br>
     <table style="text-align:left">
@@ -97,32 +97,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence4 %}
-        <td style="padding: 10px 30px">{{ choice }}</td>
-        {% endfor %}
-        <td>&nbsp</td>
-    </tr>
-</table>
-
-<br>
-<p>
-    <strong> Oft stelle ich fest, dass es für alles Pros und Cons gibt. </strong>
-</p>
-<br>
-    <table style="text-align:left">
-  <tr>
-    <td colspan="2">völlig <br/>
-        unzutreffend</td>
-      <td>&nbsp</td>
-      <td>&nbsp</td>
-      <td>&nbsp</td>
-      <td>&nbsp</td>
-    <td colspan="2">trifft ganz<br/>
-        genau zu
-    </td>
-  </tr>
-    <tr>
-        {% for choice in form.ambivalence5 %}
+        {% for choice in form.amb4 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -131,7 +106,7 @@
 
 <br>
 <p>
-    <strong> Oft fühle ich mich zwischen zwei Seiten eines Themas hin- und hergerissen. </strong>
+     Oft stelle ich fest, dass es für alles Pros und Cons gibt.
 </p>
 <br>
     <table style="text-align:left">
@@ -147,7 +122,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence6 %}
+        {% for choice in form.amb5 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -156,7 +131,7 @@
 
 <br>
 <p>
-    <strong> Häufig stimmen meine Gefühle und Gedanken nicht notwendigerweise miteinander überein. </strong>
+     Oft fühle ich mich zwischen zwei Seiten eines Themas hin- und hergerissen.
 </p>
 <br>
     <table style="text-align:left">
@@ -172,7 +147,32 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence7 %}
+        {% for choice in form.amb6 %}
+        <td style="padding: 10px 30px">{{ choice }}</td>
+        {% endfor %}
+        <td>&nbsp</td>
+    </tr>
+</table>
+
+<br>
+<p>
+     Häufig stimmen meine Gefühle und Gedanken nicht notwendigerweise miteinander überein.
+</p>
+<br>
+    <table style="text-align:left">
+  <tr>
+    <td colspan="2">völlig <br/>
+        unzutreffend</td>
+      <td>&nbsp</td>
+      <td>&nbsp</td>
+      <td>&nbsp</td>
+      <td>&nbsp</td>
+    <td colspan="2">trifft ganz<br/>
+        genau zu
+    </td>
+  </tr>
+    <tr>
+        {% for choice in form.amb7 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -180,8 +180,8 @@
 </table>
 <br>
 <p>
-    <strong>Manchmal fühlt es sich fast so an, als würde ich körperlich von Seite zu Seite wechseln,
-        wenn ich über ein Thema nachdenke. </strong>
+    Manchmal fühlt es sich fast so an, als würde ich körperlich von Seite zu Seite wechseln,
+        wenn ich über ein Thema nachdenke.
 </p>
 <br>
     <table style="text-align:left">
@@ -197,7 +197,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence8 %}
+        {% for choice in form.amb8 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -205,7 +205,7 @@
 </table>
 <br>
 <p>
-   <strong> Meine Gefühle sind oft gleichzeitig positiv und negativ. </strong>
+    Meine Gefühle sind oft gleichzeitig positiv und negativ.
 </p>
 <br>
     <table style="text-align:left">
@@ -221,7 +221,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence9 %}
+        {% for choice in form.amb9 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -229,7 +229,7 @@
 </table>
 <br>
 <p>
-   <strong> Wenn ich an ein Thema denke, erlebe ich oft einen Konflikt zwischen meinen Gedanken und Gefühlen. </strong>
+    Wenn ich an ein Thema denke, erlebe ich oft einen Konflikt zwischen meinen Gedanken und Gefühlen.
 </p>
 <br>
     <table style="text-align:left">
@@ -245,7 +245,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.ambivalence10 %}
+        {% for choice in form.amb10 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>

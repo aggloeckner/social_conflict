@@ -8,13 +8,13 @@
 {% if player.id_in_group == 1 %}
 
 <p>
-    Ihr Auszahlungsbetrag aus diesem Spiel liegt bei {{ kept }}. Für Ihre Teilnahme an der Studie erhalten Sie also insgesamt {{ total_p1 }}.
+    Ihr Auszahlungsbetrag aus diesem Spiel liegt bei {{ kept }}. Für Ihre Teilnahme an der Studie erhalten Sie also insgesamt {{ total_earnings }}.
 </p>
 
 {% elif player.id_in_group == 2 %}
 
 <p>
-    Ihr Auszahlungsbetrag aus diesem Spiel liegt bei {{ offer }}. Für Ihre Teilnahme an der Studie erhalten Sie also insgesamt {{ total_p2 }}.
+    Ihr Auszahlungsbetrag aus diesem Spiel liegt bei {{ offer }}. Für Ihre Teilnahme an der Studie erhalten Sie also insgesamt {{ total_earnings }}.
 </p>
 
 {% endif %}
