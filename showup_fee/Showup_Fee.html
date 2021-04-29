@@ -1,10 +1,12 @@
-{{ block title }}
+{% extends "global/Page.html" %}
+{% load otree %}
 
-{{ endblock }}
-{{ block content }}
+{% block title %}{% endblock %}
+
+{% block content %}
 
 {% if role == 1 %}
-<h1><strong>Aufklärung</strong></h1>
+<h1><strong>Abschluss der Studie</strong></h1>
 <p>Leider haben Sie zu lange gebraucht. Die Studie ist somit an dieser Stelle beendet.
     <br>Vielen Dank für Ihre Teilnahme!
     Ziel dieser Studie ist es, zu untersuchen, ob Entscheidungen in sozialen Interaktionen konfliktbehaftet sind und welche Konsequenzen der wahrgenommene
