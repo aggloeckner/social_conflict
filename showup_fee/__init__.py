@@ -48,7 +48,7 @@ class Showup_Fee(Page):
         return dict(role=player.participant.role)
 
 
-class Ambivalence(Page):
+class TAS(Page):
     form_model = 'player'
     form_fields = [
         'ambivalence1',
@@ -70,6 +70,6 @@ class Debriefing(Page):
 
 page_sequence = [
     Showup_Fee,
-    Ambivalence,
+    TAS,
     Debriefing,
 ]

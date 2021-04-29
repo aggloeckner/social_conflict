@@ -64,22 +64,22 @@ def set_payoffs(group: Group):
 
 
 # PAGES
-class DictatorOffer(Page):
+class PlayerA_Offer(Page):
     form_model = 'player'
     form_fields = ['offer']
 
 
-class DictatorConflict(Page):
+class PlayerA_CBG(Page):
     form_model = 'player'
     form_fields = ['conflicted', 'bad', 'good']
 
 
-class DictatorRegret(Page):
+class PlayerA_SRPP (Page):
     form_model = 'player'
     form_fields = ['satisfied', 'regret', 'play_again', 'play_again_other']
 
 
-class Ambivalence(Page):
+class TAS(Page):
     form_model = 'player'
     form_fields = [
         'ambivalence1',
@@ -109,9 +109,9 @@ class Debriefing(Page):
 
 
 page_sequence = [
-    DictatorOffer,
-    DictatorConflict,
-    DictatorRegret,
-    Ambivalence,
+    PlayerA_Offer,
+    PlayerA_CBG,
+    PlayerA_SRPP,
+    TAS,
     Debriefing,
 ]

@@ -6,7 +6,7 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'social_conflict'
+    name_in_url = 'SoCO'
     players_per_group = 2
     num_rounds = 1
     endowment = Currency(100)
@@ -123,7 +123,7 @@ class GroupingWaitPage(WaitPage):
         }
 
 
-class DictatorOffer(Page):
+class PlayerA_Offer(Page):
     form_model = 'player'
     form_fields = ['offer']
 
@@ -143,7 +143,7 @@ class ResultsWaitPage(WaitPage):
             return upcoming_apps[-1]
 
 
-class DictatorConflict(Page):
+class PlayerA_CBG(Page):
     form_model = 'player'
     form_fields = ['conflicted', 'bad', 'good']
 
@@ -152,7 +152,7 @@ class DictatorConflict(Page):
         return player.role == Constants.dictator_role
 
 
-class DictatorRegret(Page):
+class PlayerA_SRPP(Page):
     form_model = 'player'
     form_fields = ['satisfied', 'regret', 'play_again', 'play_again_other']
 
@@ -161,7 +161,7 @@ class DictatorRegret(Page):
         return player.role == Constants.dictator_role
 
 
-class RecipientConflict(Page):
+class PlayerB_CBGPP(Page):
     form_model = 'player'
     form_fields = ['conflicted', 'bad', 'good', 'play_again', 'play_again_other']
 
@@ -174,7 +174,7 @@ class RecipientConflict(Page):
         return dict(kept=Constants.endowment - player.payoff, offer=player.payoff)
 
 
-class RecipientAlternative0(Page):
+class PlayerB_Alt0(Page):
     form_model = 'player'
     form_fields = ['conflicted_0', 'bad_0', 'good_0', 'play_again_0', 'play_again_other_0']
 
@@ -183,7 +183,7 @@ class RecipientAlternative0(Page):
         return player.role == Constants.recipient_role
 
 
-class RecipientAlternative25(Page):
+class PlayerB_Alt25(Page):
     form_model = 'player'
     form_fields = ['conflicted_25', 'bad_25', 'good_25', 'play_again_25', 'play_again_other_25']
 
@@ -192,7 +192,7 @@ class RecipientAlternative25(Page):
         return player.role == Constants.recipient_role
 
 
-class RecipientAlternative50(Page):
+class PlayerB_Alt50(Page):
     form_model = 'player'
     form_fields = ['conflicted_50', 'bad_50', 'good_50', 'play_again_50', 'play_again_other_50']
 
@@ -201,7 +201,7 @@ class RecipientAlternative50(Page):
         return player.role == Constants.recipient_role
 
 
-class Ambivalence(Page):
+class TAS(Page):
     form_model = 'player'
     form_fields = [
         'ambivalence1',
@@ -232,14 +232,14 @@ class Debriefing(Page):
 
 page_sequence = [
     GroupingWaitPage,
-    DictatorOffer,
+    PlayerA_Offer,
     ResultsWaitPage,
-    DictatorConflict,
-    DictatorRegret,
-    RecipientConflict,
-    RecipientAlternative0,
-    RecipientAlternative25,
-    RecipientAlternative50,
-    Ambivalence,
+    PlayerA_CBG,
+    PlayerA_SRPP,
+    PlayerB_CBGPP,
+    PlayerB_Alt0,
+    PlayerB_Alt25,
+    PlayerB_Alt50,
+    TAS,
     Debriefing,
 ]
