@@ -71,7 +71,7 @@ class DictatorOffer(Page):
 
 class DictatorConflict(Page):
     form_model = 'player'
-    form_fields = ['offer', 'conflicted', 'bad', 'good']
+    form_fields = ['conflicted', 'bad', 'good']
 
 
 class DictatorRegret(Page):
