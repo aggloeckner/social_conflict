@@ -42,8 +42,8 @@ class Consent(Page):
     form_fields = ['consent']
 
     @staticmethod
-    def consent_error_message(player: Player, value):
-        if not value:
+    def error_message(player, values):
+        if not values['consent']:
             return (
                 "Um an der Studie teilzunehmen müssen Sie der Einverständniserklärung zustimmen. "
                 "Andernfalls schließen Sie das Fenster um die Studie an dieser Stelle zu beenden. "

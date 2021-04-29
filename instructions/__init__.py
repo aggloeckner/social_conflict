@@ -42,19 +42,20 @@ class Understanding(Page):
     form_fields = ['q1', 'q2', 'q3']
 
     @staticmethod
-    def q1_error_message(player: Player, value):
-        if not value == 50:
-            return "Ihre Antwort war nicht korrekt. Überdenken Sie Ihre Antwort erneut."
+    def error_message(player, values):
+        solutions = dict(
+            q1=50,
+            q2=100,
+            q3=0,
+        )
 
-    @staticmethod
-    def q2_error_message(player: Player, value):
-        if not value == 100:
-            return "Ihre Antwort war nicht korrekt. Überdenken Sie Ihre Antwort erneut."
+        error_messages = dict()
 
-    @staticmethod
-    def q3_error_message(player: Player, value):
-        if not value == 0:
-            return "Ihre Antwort war nicht korrekt. Überdenken Sie Ihre Antwort erneut."
+        for field_name in solutions:
+            if values[field_name] != solutions[field_name]:
+                error_messages[field_name] = 'Ihre Antwort war nicht korrekt. Überdenken Sie Ihre Antwort erneut.'
+
+        return error_messages
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
