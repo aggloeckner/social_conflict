@@ -7,7 +7,7 @@ doc = """
 Your app description
 """
 
-
+#define constants
 class Constants(BaseConstants):
     name_in_url = 'showup'
     players_per_group = None
@@ -17,7 +17,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     pass
 
-
+#function that returns 7-point Likert-scale
 def make_likert_7(label):
     return models.IntegerField(
         choices=[1, 2, 3, 4, 5, 6, 7],
@@ -31,6 +31,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    #define trait ambivalence scale items
         amb1 = make_likert_7("")
         amb2 = make_likert_7("")
         amb3 = make_likert_7("")
@@ -42,7 +43,8 @@ class Player(BasePlayer):
         amb9 = make_likert_7("")
         amb10 = make_likert_7("")
 
-#Functions
+#FUNCTIONS
+#define custom export for showup fee app
 def custom_export(players):
     # header row
     yield ['DLCID', 'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10',
@@ -54,13 +56,15 @@ def custom_export(players):
                p.payoff, session, p.group]
 
 # PAGES
+#define showup fee page
 class Showup(Page):
-
+    #provide variables for showup fee page
     def vars_for_template(player: Player):
         return dict(role=player.participant.role)
 
-
+#define trait ambivalence page
 class TAS(Page):
+    #form fields for TAS page
     form_model = 'player'
     form_fields = [
         'amb1',
@@ -74,6 +78,10 @@ class TAS(Page):
         'amb9',
         'amb10',
     ]
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.payoff = 200
 
 
 class Debriefing(Page):

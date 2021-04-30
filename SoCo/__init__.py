@@ -81,7 +81,6 @@ def set_payoffs(group: Group):
         p2 = group.get_player_by_id(2)
         if p1.to:
             p1.payoff = 0
-            p2.payoff = 200
         else:
             p1.payoff = 200 + Constants.endowment - p1.offer
             p2.payoff = 200 + p1.offer
