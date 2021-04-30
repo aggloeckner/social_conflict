@@ -84,7 +84,7 @@ class Debriefing(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            total_earnings=player.payoff
+            total_earnings=player.payoff.to_real_world_currency(player.session)
         )
 
 
