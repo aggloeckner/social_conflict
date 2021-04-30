@@ -66,7 +66,8 @@ def set_payoffs(group: Group):
 # PAGES
 
 class hypothetical(Page):
-   pass
+    pass
+
 
 class PlayerA_Offer(Page):
     form_model = 'player'
@@ -78,7 +79,7 @@ class PlayerA_CBG(Page):
     form_fields = ['conflicted', 'bad', 'good']
 
 
-class PlayerA_SRPP (Page):
+class PlayerA_SRPP(Page):
     form_model = 'player'
     form_fields = ['satisfied', 'regret', 'play_again', 'play_again_other']
 

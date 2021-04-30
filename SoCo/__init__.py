@@ -76,15 +76,14 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 def set_payoffs(group: Group):
-    p1 = group.get_player_by_id(1)
-    p2 = group.get_player_by_id(2)
-    if p1.offer is None:
-        p1.payoff = (Constants.endowment - p1.offer) + intial_pay
-        p2.payoff = p1.offer + initial_pay
-    else:
-        p1.payoff = -200
-        p2.payoff = 200
-
+        p1 = group.get_player_by_id(1)
+        p2 = group.get_player_by_id(2)
+        if p1.offer is not None:
+            p1.payoff = Constants.endowment - p1.offer
+            p2.payoff = p1.offer
+        else:
+            p1.payoff = -200
+            p2.payoff = 200
 
 def waiting_too_long(player):
     participant = player.participant
@@ -226,7 +225,6 @@ class Debriefing(Page):
         kept=p1.payoff.to_real_world_currency(player.session),
         offer=p2.payoff.to_real_world_currency(player.session),
         total_earnings=player.participant.payoff_plus_participation_fee()
-
         )
 
 
