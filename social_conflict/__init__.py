@@ -40,6 +40,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     offer = models.CurrencyField(min=0, max=Constants.endowment, label="")
+    to = models.BooleanField()
     conflicted = make_likert("")
     bad = make_likert("")
     good = make_likert("")
@@ -78,18 +79,19 @@ class Player(BasePlayer):
 def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
-    if p1.offer is not None:
-        p1.payoff = Constants.endowment - p1.offer
-        p2.payoff = p1.offer
-    else:
-        p1.payoff = -200
+
+    if p1.to:
+        p1.payoff = 0
         p2.payoff = 200
+    else:
+        p1.payoff = 200 + Constants.endowment - p1.offer
+        p2.payoff = 200 + p1.offer
 
 
 def waiting_too_long(player):
     participant = player.participant
     import time
-    return time.time() - participant.wait_page_arrival > 300
+    return time.time() - participant.wait_page_arrival > 30
 
 
 def group_by_arrival_time_method(subsession, waiting_players):
@@ -127,7 +129,14 @@ class DictatorOffer(Page):
     form_model = 'player'
     form_fields = ['offer']
 
-    timeout_seconds = 300
+    timeout_seconds = 30
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.to = True
+        else:
+            player.to = False
 
     @staticmethod
     def is_displayed(player: Player):
@@ -151,6 +160,10 @@ class DictatorConflict(Page):
     def is_displayed(player: Player):
         return player.role == Constants.dictator_role
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(kept=Constants.endowment - player.offer, offer=player.offer)
+
 
 class DictatorRegret(Page):
     form_model = 'player'
@@ -159,6 +172,10 @@ class DictatorRegret(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.role == Constants.dictator_role
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(kept=Constants.endowment - player.offer, offer=player.offer)
 
 
 class RecipientConflict(Page):
@@ -171,7 +188,8 @@ class RecipientConflict(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(kept=Constants.endowment - player.payoff, offer=player.payoff)
+        p1 = player.group.get_player_by_id(1)
+        return dict(kept=Constants.endowment - p1.offer, offer=p1.offer)
 
 
 class RecipientAlternative0(Page):
@@ -223,10 +241,10 @@ class Debriefing(Page):
         p1 = player.group.get_player_by_id(1)
         p2 = player.group.get_player_by_id(2)
         return dict(
-            kept=p1.payoff.to_real_world_currency(player.session),
-            offer=p2.payoff.to_real_world_currency(player.session),
-            total_p1=(200 + p1.payoff).to_real_world_currency(player.session),
-            total_p2=(200 + p2.payoff).to_real_world_currency(player.session),
+            kept=(Constants.endowment - p1.offer).to_real_world_currency(player.session),
+            offer=p1.offer.to_real_world_currency(player.session),
+            total_p1=p1.payoff.to_real_world_currency(player.session),
+            total_p2=p2.payoff.to_real_world_currency(player.session),
         )
 
 

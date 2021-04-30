@@ -58,10 +58,6 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
-def set_payoffs(group: Group):
-    p1 = group.get_player_by_id(1)
-    p1.payoff = Constants.endowment - p1.offer
-
 
 # PAGES
 class DictatorOffer(Page):
@@ -73,16 +69,25 @@ class DictatorConflict(Page):
     form_model = 'player'
     form_fields = ['conflicted', 'bad', 'good']
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(kept=Constants.endowment - player.offer, offer=player.offer)
+
 
 class DictatorRegret(Page):
     form_model = 'player'
     form_fields = ['satisfied', 'regret', 'play_again', 'play_again_other']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(kept=Constants.endowment - player.offer, offer=player.offer)
 
 
 class Ambivalence(Page):
     form_model = 'player'
     form_fields = [
         'ambivalence1',
+        'ambivalence2',
         'ambivalence2',
         'ambivalence3',
         'ambivalence4',
@@ -94,17 +99,17 @@ class Ambivalence(Page):
         'ambivalence10',
     ]
 
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.payoff = 250
+
 
 class Debriefing(Page):
-    after_all_players_arrive = 'set_payoffs'
 
     @staticmethod
     def vars_for_template(player: Player):
-        p1 = player.group.get_player_by_id(1)
-        p2 = player.group.get_player_by_id(2)
         return dict(
-            kept=p1.payoff.to_real_world_currency(player.session),
-            total_p1=(200 + p1.payoff).to_real_world_currency(player.session),
+            total_p1=player.payoff.to_real_world_currency(player.session),
         )
 
 
