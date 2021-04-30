@@ -67,8 +67,10 @@ def custom_export(players):
     for p in players:
         participant = p.participant
         session = p.session
-        yield [participant.label, p.id_in_group, p.offer, p.confl, p.bad, p.good, p.satisfied, p.regret, p.p_a, p.p_a_o, p.amb1, p.amb2,
-               p.amb3, p.amb4, p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10, p.payoff, session]
+        yield [participant.label, p.id_in_group, p.offer, p.conflicted, p.bad, p.good, p.satisfied, p.regret,
+               p.play_again, p.play_again_other, p.ambivalence1, p.ambivalence2, p.ambivalence3, p.ambivalence4,
+               p.ambivalence5, p.ambivalence6, p.ambivalence7, p.ambivalence8, p.ambivalence9, p.ambivalence10, p.payoff,
+               session]
 
 # PAGES
 class hypothetical(Page):

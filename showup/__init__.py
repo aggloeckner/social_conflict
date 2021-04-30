@@ -7,10 +7,12 @@ doc = """
 Your app description
 """
 
+
 class Constants(BaseConstants):
     name_in_url = 'showup'
     players_per_group = None
     num_rounds = 1
+
 
 class Subsession(BaseSubsession):
     pass
@@ -41,16 +43,15 @@ class Player(BasePlayer):
         amb10 = make_likert_7("")
 
 #Functions
-
 def custom_export(players):
     # header row
     yield ['DLCID', 'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10',
-           'payoff', 'timeout', 'sessionid', 'group']
+           'payoff', 'sessionid', 'group']
     for p in players:
         participant = p.participant
         session = p.session
         yield [participant.label, p.amb1, p.amb2, p.amb3, p.amb4, p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10,
-               p.payoff, p.to, session, p.group]
+               p.payoff, session, p.group]
 
 # PAGES
 class Showup(Page):
@@ -74,15 +75,18 @@ class TAS(Page):
         'amb10',
     ]
 
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.payoff = 200
+
 
 class Debriefing(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        p1 = player.group.get_player_by_id(1)
-        p2 = player.group.get_player_by_id(2)
         return dict(
-            total_earnings=player.participant.payoff_plus_participation_fee()
+            total_earnings=player.payoff
         )
+
 
 page_sequence = [
     Showup,
