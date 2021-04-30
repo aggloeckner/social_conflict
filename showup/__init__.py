@@ -75,10 +75,6 @@ class TAS(Page):
         'amb10',
     ]
 
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        player.payoff = 200
-
 
 class Debriefing(Page):
     @staticmethod
