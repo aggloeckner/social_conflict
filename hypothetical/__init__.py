@@ -84,7 +84,7 @@ class PlayerA_Offer(Page):
 
 class PlayerA_CBG(Page):
     form_model = 'player'
-    form_fields = ['conflicted', 'bad', 'good']
+    form_fields = ['confl', 'bad', 'good']
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -93,7 +93,7 @@ class PlayerA_CBG(Page):
 
 class PlayerA_SRPP(Page):
     form_model = 'player'
-    form_fields = ['satisfied', 'regret', 'play_again', 'play_again_other']
+    form_fields = ['satisfied', 'regret', 'p_a', 'p_a_o']
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -103,17 +103,17 @@ class PlayerA_SRPP(Page):
 class TAS(Page):
     form_model = 'player'
     form_fields = [
-        'ambivalence1',
-        'ambivalence2',
-        'ambivalence2',
-        'ambivalence3',
-        'ambivalence4',
-        'ambivalence5',
-        'ambivalence6',
-        'ambivalence7',
-        'ambivalence8',
-        'ambivalence9',
-        'ambivalence10',
+        'amb1',
+        'amb2',
+        'amb2',
+        'amb3',
+        'amb4',
+        'amb5',
+        'amb6',
+        'amb7',
+        'amb8',
+        'amb9',
+        'amb10',
     ]
 
     @staticmethod
