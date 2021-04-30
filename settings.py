@@ -7,6 +7,7 @@ SESSION_CONFIGS = [
         display_name="Entscheidungsaufgabe",
         num_demo_participants=2,
         app_sequence=['consent', 'labids', 'instructions', 'SoCo', 'hypothetical', 'showup'],
+        initial_pay = 2.0,
     ),
 ]
 

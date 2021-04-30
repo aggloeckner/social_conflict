@@ -64,6 +64,10 @@ def set_payoffs(group: Group):
 
 
 # PAGES
+
+class hypothetical(Page):
+   pass
+
 class PlayerA_Offer(Page):
     form_model = 'player'
     form_fields = ['offer']
@@ -109,6 +113,7 @@ class Debriefing(Page):
 
 
 page_sequence = [
+    hypothetical,
     PlayerA_Offer,
     PlayerA_CBG,
     PlayerA_SRPP,

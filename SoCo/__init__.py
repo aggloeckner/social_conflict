@@ -78,9 +78,9 @@ class Player(BasePlayer):
 def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
-    if p1.offer is not None:
-        p1.payoff = (Constants.endowment - p1.offer) + cu(2)
-        p2.payoff = p1.offer + cu(2)
+    if p1.offer is None:
+        p1.payoff = (Constants.endowment - p1.offer) + intial_pay
+        p2.payoff = p1.offer + initial_pay
     else:
         p1.payoff = -200
         p2.payoff = 200
