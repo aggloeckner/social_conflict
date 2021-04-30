@@ -79,13 +79,12 @@ class Player(BasePlayer):
 def set_payoffs(group: Group):
         p1 = group.get_player_by_id(1)
         p2 = group.get_player_by_id(2)
-
-    if p1.to:
-        p1.payoff = 0
-        p2.payoff = 200
-    else:
-        p1.payoff = 200 + Constants.endowment - p1.offer
-        p2.payoff = 200 + p1.offer
+        if p1.to:
+            p1.payoff = 0
+            p2.payoff = 200
+        else:
+            p1.payoff = 200 + Constants.endowment - p1.offer
+            p2.payoff = 200 + p1.offer
 
 
 def waiting_too_long(player):
@@ -105,6 +104,21 @@ def group_by_arrival_time_method(subsession, waiting_players):
         if waiting_too_long(player):
             # make a single-player group.
             return [player]
+
+
+def custom_export(players):
+    # header row
+    yield ['DLCID', 'role', 'transfer', 'expconf', 'objctbad', 'objctgood', 'Dsatisfac', 'Dregret', 'sameagain', ' othragain',
+           'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10', 'expconf0',
+           'objbad0', 'objgood0', 'again0', 'othgain0', 'expconf25', 'objbad25', 'objgood25', 'again25', 'othgain25',
+           'expconf50', 'objbad50', 'objgood50', 'again50', 'othgain50', 'payoff', 'timeout', 'sessionid', 'group']
+    for p in players:
+        participant = p.participant
+        session = p.session
+        yield [participant.label, p.id_in_group, p.offer, p.confl, p.bad, p.good, p.satisfied, p.regret, p.p_a, p.p_a_o, p.amb1, p.amb2,
+               p.amb3, p.amb4, p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10, p.confl_0, p.bad_0, p.good_0, p.p_a_0,
+               p.p_a_o_0,  p.confl_25, p.bad_25, p.good_25, p.p_a_25, p.p_a_o_25,  p.confl_50, p.bad_50, p.good_50,
+               p.p_a_50, p.p_a_o_50, p.payoff, p.to, session, p.group]
 
 
 # PAGES

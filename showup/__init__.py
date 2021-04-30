@@ -40,6 +40,17 @@ class Player(BasePlayer):
         amb9 = make_likert_7("")
         amb10 = make_likert_7("")
 
+#Functions
+
+def custom_export(players):
+    # header row
+    yield ['DLCID', 'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10',
+           'payoff', 'timeout', 'sessionid', 'group']
+    for p in players:
+        participant = p.participant
+        session = p.session
+        yield [participant.label, p.amb1, p.amb2, p.amb3, p.amb4, p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10,
+               p.payoff, p.to, session, p.group]
 
 # PAGES
 class Showup(Page):

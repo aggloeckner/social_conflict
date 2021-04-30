@@ -59,8 +59,18 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 
-# PAGES
+def custom_export(players):
+    # header row
+    yield ['DLCID', 'role', 'transfer', 'expconf', 'objctbad', 'objctgood', 'Dsatisfac', 'Dregret', 'sameagain',
+           'othragain', 'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10',
+           'payoff', 'sessionid']
+    for p in players:
+        participant = p.participant
+        session = p.session
+        yield [participant.label, p.id_in_group, p.offer, p.confl, p.bad, p.good, p.satisfied, p.regret, p.p_a, p.p_a_o, p.amb1, p.amb2,
+               p.amb3, p.amb4, p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10, p.payoff, session]
 
+# PAGES
 class hypothetical(Page):
     pass
 
