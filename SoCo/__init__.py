@@ -120,7 +120,7 @@ class GroupingWaitPage(WaitPage):
     @staticmethod
     def vars_for_template(player: Player):
         return {
-            'body_text': "Sobald die nächste Person eintrifft, geht es los.",
+            'body_text': "Ihnen wird nun eine Person zugeteilt. Sobald die nächste Person eintrifft, geht es los.",
             'title_text': "Bitte warten Sie.",
         }
 
@@ -150,6 +150,13 @@ class ResultsWaitPage(WaitPage):
     def app_after_this_page(player, upcoming_apps):
         if waiting_too_long(player):
             return upcoming_apps[-1]
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return {
+            'body_text': "Ihnen wurde die Rolle B zugewiesen. Person A entscheidet nun über den Betrag, der an Sie abgeben wird.",
+            'title_text': "Bitte warten Sie.",
+        }
 
 
 class PlayerA_CBG(Page):
