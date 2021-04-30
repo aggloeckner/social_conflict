@@ -1,6 +1,4 @@
 from otree.api import *
-from otree.models import player
-
 c = Currency
 
 doc = """
@@ -78,13 +76,14 @@ class TAS(Page):
         'amb9',
         'amb10',
     ]
-
+    #give player payoff for participation (showup fee)
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         player.payoff = 200
 
-
+#define debriefing page
 class Debriefing(Page):
+    #provide debriefing page with variables
     @staticmethod
     def vars_for_template(player: Player):
         return dict(

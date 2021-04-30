@@ -4,7 +4,7 @@ doc = """
 Your app description
 """
 
-
+#define necessary constants
 class Constants(BaseConstants):
     name_in_url = 'SoCO'
     players_per_group = 2
@@ -17,7 +17,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     pass
 
-
+#function that returns 10-point Likert-scale
 def make_likert(label):
     return models.IntegerField(
         choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -25,7 +25,7 @@ def make_likert(label):
         widget=widgets.RadioSelectHorizontal,
     )
 
-
+#function that returns 7-point Likert-scale
 def make_likert_7(label):
     return models.IntegerField(
         choices=[1, 2, 3, 4, 5, 6, 7],
@@ -37,10 +37,13 @@ def make_likert_7(label):
 class Group(BaseGroup):
     pass
 
-
+#define player model
 class Player(BasePlayer):
+    #define offer variable that saves dictator's tranfer
     offer = models.CurrencyField(min=0, max=Constants.endowment, label="")
+    #define timeout variable that states if a timeout occured
     to = models.BooleanField()
+    #define variables for social conflict items
     confl = make_likert("")
     bad = make_likert("")
     good = make_likert("")
@@ -48,6 +51,7 @@ class Player(BasePlayer):
     regret = make_likert("")
     p_a = make_likert("")
     p_a_o = make_likert("")
+    #define variables for alternative amounts displayed to the recipient
     confl_0 = make_likert("")
     confl_25 = make_likert("")
     confl_50 = make_likert("")
@@ -63,6 +67,7 @@ class Player(BasePlayer):
     p_a_o_0 = make_likert("")
     p_a_o_25 = make_likert("")
     p_a_o_50 = make_likert("")
+    #define trait ambivalence scale items
     amb1 = make_likert_7("")
     amb2 = make_likert_7("")
     amb3 = make_likert_7("")
@@ -76,6 +81,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
+#define function that sets the payoffs for players depending on whether a timeout occurred
 def set_payoffs(group: Group):
         p1 = group.get_player_by_id(1)
         p2 = group.get_player_by_id(2)
@@ -85,13 +91,13 @@ def set_payoffs(group: Group):
             p1.payoff = 200 + Constants.endowment - p1.offer
             p2.payoff = 200 + p1.offer
 
-
+#define a function that checks whether players are waiting too long
 def waiting_too_long(player):
     participant = player.participant
     import time
     return time.time() - participant.wait_page_arrival > 300
 
-
+#define a function that groups players when they arrive at this app
 def group_by_arrival_time_method(subsession, waiting_players):
     if len(waiting_players) >= 2:
         p1 = waiting_players[0]
@@ -104,7 +110,7 @@ def group_by_arrival_time_method(subsession, waiting_players):
             # make a single-player group.
             return [player]
 
-
+#define custom export for social conflict app
 def custom_export(players):
     # header row
     yield ['DLCID', 'role', 'transfer', 'expconf', 'objctbad', 'objctgood', 'Dsatisfac', 'Dregret', 'sameagain', ' othragain',
@@ -121,15 +127,18 @@ def custom_export(players):
 
 
 # PAGES
+#define Waitpage that groups all players
 class GroupingWaitPage(WaitPage):
     group_by_arrival_time = True
 
+    #method that redirects players when odd number
     @staticmethod
     def app_after_this_page(player, upcoming_apps):
         group = player.group
         if len(group.get_players()) == 1:
             return upcoming_apps[0]
 
+    #method that changes the text of the waitpage
     @staticmethod
     def vars_for_template(player: Player):
         return {
@@ -137,13 +146,14 @@ class GroupingWaitPage(WaitPage):
             'title_text': "Bitte warten Sie.",
         }
 
-
+#page for the dictator to make an offer
 class PlayerA_Offer(Page):
     form_model = 'player'
     form_fields = ['offer']
 
     timeout_seconds = 300
 
+    #checks whether timeout happened and sets timeout variable to true if so
     @staticmethod
     def before_next_page(player, timeout_happened):
         if timeout_happened:
@@ -151,6 +161,7 @@ class PlayerA_Offer(Page):
         else:
             player.to = False
 
+    #function that makes sure to just display page to dictators
     @staticmethod
     def is_displayed(player: Player):
         return player.role == Constants.dictator_role
