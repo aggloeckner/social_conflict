@@ -38,23 +38,23 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     offer = models.CurrencyField(min=0, max=Constants.endowment, label="")
-    conflicted = make_likert("")
+    confl = make_likert("")
     bad = make_likert("")
     good = make_likert("")
     satisfied = make_likert("")
     regret = make_likert("")
-    play_again = make_likert("")
-    play_again_other = make_likert("")
-    ambivalence1 = make_likert_7("")
-    ambivalence2 = make_likert_7("")
-    ambivalence3 = make_likert_7("")
-    ambivalence4 = make_likert_7("")
-    ambivalence5 = make_likert_7("")
-    ambivalence6 = make_likert_7("")
-    ambivalence7 = make_likert_7("")
-    ambivalence8 = make_likert_7("")
-    ambivalence9 = make_likert_7("")
-    ambivalence10 = make_likert_7("")
+    p_a = make_likert("")
+    p_a_o = make_likert("")
+    amb1 = make_likert_7("")
+    amb2 = make_likert_7("")
+    amb3 = make_likert_7("")
+    amb4 = make_likert_7("")
+    amb5 = make_likert_7("")
+    amb6 = make_likert_7("")
+    amb7 = make_likert_7("")
+    amb8 = make_likert_7("")
+    amb9 = make_likert_7("")
+    amb10 = make_likert_7("")
 
 
 # FUNCTIONS
@@ -67,9 +67,9 @@ def custom_export(players):
     for p in players:
         participant = p.participant
         session = p.session
-        yield [participant.label, p.id_in_group, p.offer, p.conflicted, p.bad, p.good, p.satisfied, p.regret,
-               p.play_again, p.play_again_other, p.ambivalence1, p.ambivalence2, p.ambivalence3, p.ambivalence4,
-               p.ambivalence5, p.ambivalence6, p.ambivalence7, p.ambivalence8, p.ambivalence9, p.ambivalence10, p.payoff,
+        yield [participant.label, p.id_in_group, p.offer, p.confl, p.bad, p.good, p.satisfied, p.regret,
+               p.p_a, p.p_a_o, p.amb1, p.amb2, p.amb3, p.amb4,
+               p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10, p.payoff,
                session]
 
 # PAGES
