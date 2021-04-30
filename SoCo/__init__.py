@@ -6,7 +6,7 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'social_conflict'
+    name_in_url = 'SoCO'
     players_per_group = 2
     num_rounds = 1
     endowment = Currency(100)
@@ -41,44 +41,44 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     offer = models.CurrencyField(min=0, max=Constants.endowment, label="")
     to = models.BooleanField()
-    conflicted = make_likert("")
+    confl = make_likert("")
     bad = make_likert("")
     good = make_likert("")
     satisfied = make_likert("")
     regret = make_likert("")
-    play_again = make_likert("")
-    play_again_other = make_likert("")
-    conflicted_0 = make_likert("")
-    conflicted_25 = make_likert("")
-    conflicted_50 = make_likert("")
+    p_a = make_likert("")
+    p_a_o = make_likert("")
+    confl_0 = make_likert("")
+    confl_25 = make_likert("")
+    confl_50 = make_likert("")
     bad_0 = make_likert("")
     bad_25 = make_likert("")
     bad_50 = make_likert("")
     good_0 = make_likert("")
     good_25 = make_likert("")
     good_50 = make_likert("")
-    play_again_0 = make_likert("")
-    play_again_25 = make_likert("")
-    play_again_50 = make_likert("")
-    play_again_other_0 = make_likert("")
-    play_again_other_25 = make_likert("")
-    play_again_other_50 = make_likert("")
-    ambivalence1 = make_likert_7("")
-    ambivalence2 = make_likert_7("")
-    ambivalence3 = make_likert_7("")
-    ambivalence4 = make_likert_7("")
-    ambivalence5 = make_likert_7("")
-    ambivalence6 = make_likert_7("")
-    ambivalence7 = make_likert_7("")
-    ambivalence8 = make_likert_7("")
-    ambivalence9 = make_likert_7("")
-    ambivalence10 = make_likert_7("")
+    p_a_0 = make_likert("")
+    p_a_25 = make_likert("")
+    p_a_50 = make_likert("")
+    p_a_o_0 = make_likert("")
+    p_a_o_25 = make_likert("")
+    p_a_o_50 = make_likert("")
+    amb1 = make_likert_7("")
+    amb2 = make_likert_7("")
+    amb3 = make_likert_7("")
+    amb4 = make_likert_7("")
+    amb5 = make_likert_7("")
+    amb6 = make_likert_7("")
+    amb7 = make_likert_7("")
+    amb8 = make_likert_7("")
+    amb9 = make_likert_7("")
+    amb10 = make_likert_7("")
 
 
 # FUNCTIONS
 def set_payoffs(group: Group):
-    p1 = group.get_player_by_id(1)
-    p2 = group.get_player_by_id(2)
+        p1 = group.get_player_by_id(1)
+        p2 = group.get_player_by_id(2)
 
     if p1.to:
         p1.payoff = 0
@@ -91,7 +91,7 @@ def set_payoffs(group: Group):
 def waiting_too_long(player):
     participant = player.participant
     import time
-    return time.time() - participant.wait_page_arrival > 30
+    return time.time() - participant.wait_page_arrival > 300
 
 
 def group_by_arrival_time_method(subsession, waiting_players):
@@ -125,11 +125,11 @@ class GroupingWaitPage(WaitPage):
         }
 
 
-class DictatorOffer(Page):
+class PlayerA_Offer(Page):
     form_model = 'player'
     form_fields = ['offer']
 
-    timeout_seconds = 30
+    timeout_seconds = 300
 
     @staticmethod
     def before_next_page(player, timeout_happened):
@@ -152,9 +152,9 @@ class ResultsWaitPage(WaitPage):
             return upcoming_apps[-1]
 
 
-class DictatorConflict(Page):
+class PlayerA_CBG(Page):
     form_model = 'player'
-    form_fields = ['conflicted', 'bad', 'good']
+    form_fields = ['confl', 'bad', 'good']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -165,9 +165,9 @@ class DictatorConflict(Page):
         return dict(kept=Constants.endowment - player.offer, offer=player.offer)
 
 
-class DictatorRegret(Page):
+class PlayerA_SRPP(Page):
     form_model = 'player'
-    form_fields = ['satisfied', 'regret', 'play_again', 'play_again_other']
+    form_fields = ['satisfied', 'regret', 'p_a', 'p_a_o']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -178,9 +178,9 @@ class DictatorRegret(Page):
         return dict(kept=Constants.endowment - player.offer, offer=player.offer)
 
 
-class RecipientConflict(Page):
+class PlayerB_CBGPP(Page):
     form_model = 'player'
-    form_fields = ['conflicted', 'bad', 'good', 'play_again', 'play_again_other']
+    form_fields = ['confl', 'bad', 'good', 'p_a', 'p_a_o']
 
     @staticmethod
     def is_displayed(player: Player):
@@ -192,46 +192,46 @@ class RecipientConflict(Page):
         return dict(kept=Constants.endowment - p1.offer, offer=p1.offer)
 
 
-class RecipientAlternative0(Page):
+class PlayerB_Alt0(Page):
     form_model = 'player'
-    form_fields = ['conflicted_0', 'bad_0', 'good_0', 'play_again_0', 'play_again_other_0']
+    form_fields = ['confl_0', 'bad_0', 'good_0', 'p_a_0', 'p_a_o_0']
 
     @staticmethod
     def is_displayed(player: Player):
         return player.role == Constants.recipient_role
 
 
-class RecipientAlternative25(Page):
+class PlayerB_Alt25(Page):
     form_model = 'player'
-    form_fields = ['conflicted_25', 'bad_25', 'good_25', 'play_again_25', 'play_again_other_25']
+    form_fields = ['confl_25', 'bad_25', 'good_25', 'p_a_25', 'p_a_o_25']
 
     @staticmethod
     def is_displayed(player: Player):
         return player.role == Constants.recipient_role
 
 
-class RecipientAlternative50(Page):
+class PlayerB_Alt50(Page):
     form_model = 'player'
-    form_fields = ['conflicted_50', 'bad_50', 'good_50', 'play_again_50', 'play_again_other_50']
+    form_fields = ['confl_50', 'bad_50', 'good_50', 'p_a_50', 'p_a_o_50']
 
     @staticmethod
     def is_displayed(player: Player):
         return player.role == Constants.recipient_role
 
 
-class Ambivalence(Page):
+class TAS(Page):
     form_model = 'player'
     form_fields = [
-        'ambivalence1',
-        'ambivalence2',
-        'ambivalence3',
-        'ambivalence4',
-        'ambivalence5',
-        'ambivalence6',
-        'ambivalence7',
-        'ambivalence8',
-        'ambivalence9',
-        'ambivalence10',
+        'amb1',
+        'amb2',
+        'amb3',
+        'amb4',
+        'amb5',
+        'amb6',
+        'amb7',
+        'amb8',
+        'amb9',
+        'amb10',
     ]
 
 
@@ -250,14 +250,14 @@ class Debriefing(Page):
 
 page_sequence = [
     GroupingWaitPage,
-    DictatorOffer,
+    PlayerA_Offer,
     ResultsWaitPage,
-    DictatorConflict,
-    DictatorRegret,
-    RecipientConflict,
-    RecipientAlternative0,
-    RecipientAlternative25,
-    RecipientAlternative50,
-    Ambivalence,
+    PlayerA_CBG,
+    PlayerA_SRPP,
+    PlayerB_CBGPP,
+    PlayerB_Alt0,
+    PlayerB_Alt25,
+    PlayerB_Alt50,
+    TAS,
     Debriefing,
 ]

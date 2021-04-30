@@ -5,14 +5,19 @@
 
 {% block content %}
 <p>
-    Person A hat {{ kept }} für sich behalten. Damit haben Sie <strong>{{ offer }}</strong> von Person A erhalten.<br>
-    Bitte <strong>beantworten</strong> Sie die folgenden <strong>Fragen</strong>. Klicken Sie dann auf <strong>„weiter“</strong>.
+    Uns interessiert auch, wie Sie sich bezüglich des folgenden Betrags gefühlt hätten. Bitte <strong>beantworten</strong>
+    Sie deshalb die folgenden <strong>Fragen</strong>. Dabei ist es möglich, dass sich der hier angegebene Betrag
+    mit dem echten, in ihrer Runde empfangenen, Betrag deckt.
+</p>
+
+<p>
+    Angenommen Person A habe Ihnen <strong>0 Cent</strong> abgegeben:
 </p>
 
 <p>
     In welchem Maß empfinden Sie einen Konflikt bezüglich des von Person A gesendeten Betrags?
 </p>
-    <table style="text-align:left">
+    <table>
   <tr>
     <td colspan="2">überhaupt <br/>
         nicht</td>
@@ -28,7 +33,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.conflicted %}
+        {% for choice in form.confl_0 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -54,7 +59,7 @@
     </td>
     </tr>
     <tr>
-        {% for choice in form.bad %}
+        {% for choice in form.bad_0 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -62,8 +67,8 @@
 </table>
 
 <p>
-    Wie gut fühlen Sie sich bezüglich des von Person A gesendeten Betrags?
-</p>
+    Wie gut fühlen Sie sich bezüglich des von Person A gesendeten Betrags?</p>
+<p>
  <table style="text-align:left">
   <tr>
     <td colspan="2">überhaupt <br/>
@@ -80,7 +85,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.good %}
+        {% for choice in form.good_0 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -90,7 +95,8 @@
 <p>
     Würden Sie nochmal mit dieser Person spielen?
 </p>
-<table>
+
+    <table>
   <tr>
     <td colspan="2">sehr <br/>
         unwahrscheinlich</td>
@@ -106,7 +112,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.play_again %}
+        {% for choice in form.p_a_0 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>
@@ -114,8 +120,8 @@
 </table>
 
 <p>
-    Würden Sie nochmal mit einer anderen Person spielen?
-</p>
+    Würden Sie nochmal mit einer anderen Person spielen?</p>
+<p>
     <table>
   <tr>
     <td colspan="2">sehr <br/>
@@ -132,7 +138,7 @@
     </td>
   </tr>
     <tr>
-        {% for choice in form.play_again_other %}
+        {% for choice in form.p_a_o_0 %}
         <td style="padding: 10px 30px">{{ choice }}</td>
         {% endfor %}
         <td>&nbsp</td>

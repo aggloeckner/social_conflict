@@ -5,20 +5,7 @@
 
 {% block content %}
 
-{% if player.id_in_group == 1 %}
-
-<p>
-    Ihr Auszahlungsbetrag aus diesem Spiel liegt bei {{ kept }}. Für Ihre Teilnahme an der Studie erhalten Sie also insgesamt {{ total_p1 }}.
-</p>
-
-{% elif player.id_in_group == 2 %}
-
-<p>
-    Ihr Auszahlungsbetrag aus diesem Spiel liegt bei {{ offer }}. Für Ihre Teilnahme an der Studie erhalten Sie also insgesamt {{ total_p2 }}.
-</p>
-
-{% endif %}
-
+<p>Da die Ihnen zugeteilte Person kein Angebot abgegeben hat erhalten Sie für Ihre Teilnahme einen Betrag von <strong>{{ total_earnings }}</strong>.</p>
 <p>
     Damit ist diese Studie abgeschlossen. Vielen Dank für Ihre Teilnahme! Ziel dieser Studie ist es, zu untersuchen,
     ob Entscheidungen in sozialen Interaktionen konfliktbehaftet sind und welche Konsequenzen der wahrgenommene
