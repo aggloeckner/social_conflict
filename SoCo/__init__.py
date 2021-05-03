@@ -78,6 +78,7 @@ class Player(BasePlayer):
     amb8 = make_likert_7("")
     amb9 = make_likert_7("")
     amb10 = make_likert_7("")
+    fin = models.IntegerField(initial=0)
 
 
 # FUNCTIONS
@@ -113,17 +114,18 @@ def group_by_arrival_time_method(subsession, waiting_players):
 #define custom export for social conflict app
 def custom_export(players):
     # header row
-    yield ['DLCID', 'role', 'transfer', 'expconf', 'objctbad', 'objctgood', 'Dsatisfac', 'Dregret', 'sameagain', ' othragain',
-           'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10', 'expconf0',
-           'objbad0', 'objgood0', 'again0', 'othgain0', 'expconf25', 'objbad25', 'objgood25', 'again25', 'othgain25',
-           'expconf50', 'objbad50', 'objgood50', 'again50', 'othgain50', 'payoff', 'timeout', 'sessionid', 'group']
+    yield ['DLCID', 'role', 'transfer', 'expconf', 'objctbad', 'objctgood', 'Dsatisfac', 'Dregret', 'sameagain',
+           ' othragain', 'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10',
+           'expconf0', 'objbad0', 'objgood0', 'again0', 'othgain0', 'expconf25', 'objbad25', 'objgood25', 'again25',
+           'othgain25', 'expconf50', 'objbad50', 'objgood50', 'again50', 'othgain50', 'payoff', 'timeout', 'sessionid',
+           'id_in_sess', 'group', 'part_code', 'finished']
     for p in players:
         participant = p.participant
         session = p.session
-        yield [participant.label, p.id_in_group, p.offer, p.confl, p.bad, p.good, p.satisfied, p.regret, p.p_a, p.p_a_o, p.amb1, p.amb2,
+        yield [participant.label, p.role, p.offer, p.confl, p.bad, p.good, p.satisfied, p.regret, p.p_a, p.p_a_o, p.amb1, p.amb2,
                p.amb3, p.amb4, p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10, p.confl_0, p.bad_0, p.good_0, p.p_a_0,
                p.p_a_o_0,  p.confl_25, p.bad_25, p.good_25, p.p_a_25, p.p_a_o_25,  p.confl_50, p.bad_50, p.good_50,
-               p.p_a_50, p.p_a_o_50, p.payoff, p.to, session, p.group]
+               p.p_a_50, p.p_a_o_50, p.payoff, p.to, session.code, participant.id_in_session, p.group, participant.code, p.fin]
 
 
 # PAGES
@@ -264,6 +266,10 @@ class TAS(Page):
         'amb9',
         'amb10',
     ]
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.fin = 1
 
 
 class Debriefing(Page):

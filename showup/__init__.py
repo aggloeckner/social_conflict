@@ -40,18 +40,19 @@ class Player(BasePlayer):
         amb8 = make_likert_7("")
         amb9 = make_likert_7("")
         amb10 = make_likert_7("")
+        fin = models.IntegerField(initial=0)
 
 #FUNCTIONS
 #define custom export for showup fee app
 def custom_export(players):
     # header row
     yield ['DLCID', 'ambv1', 'ambv2', 'ambv3', 'ambv4', 'ambv5', 'ambv6', 'ambv7', 'ambv8', 'ambv9', 'ambv10',
-           'payoff', 'sessionid', 'group']
+           'payoff', 'sessionid', 'id_in_session', 'part_code', 'finished']
     for p in players:
         participant = p.participant
         session = p.session
         yield [participant.label, p.amb1, p.amb2, p.amb3, p.amb4, p.amb5, p.amb6, p.amb7, p.amb8, p.amb9, p.amb10,
-               p.payoff, session, p.group]
+               p.payoff, session.code, participant.id_in_session, participant.code, p.fin]
 
 # PAGES
 #define showup fee page
@@ -79,6 +80,7 @@ class TAS(Page):
     #give player payoff for participation (showup fee)
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
+        player.fin = 1
         player.payoff = 200
 
 #define debriefing page
