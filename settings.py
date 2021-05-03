@@ -32,7 +32,7 @@ POINTS_CUSTOM_NAME = 'Cent'
 
 ROOMS = [
     dict(
-        name='socialconflict',
+        name='soziale_interaktionen',
         display_name='Entscheidungsaufgabe Raum',
         participant_label_file='_rooms/socialconflict.txt',
         use_secure_urls=True
